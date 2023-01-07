@@ -215,6 +215,17 @@ public class ScoreBoard
     /// <exception cref="ScoreBoardException"></exception>
     public IList<GameMatch> GetSummary()
     {
-        throw new NotImplementedException();
+        try
+        {
+            var ret = this.GetScoreBoard()              // Retrieving ScoreBoard
+                .OrderByDescending(v=>v.TotalScore)     // ordered desc. by total score
+                .ThenByDescending(v=>v.LastUpdateTime); // and then dec. by last update time
+
+            return ret.ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new ScoreBoardException("Error getting getting game match summary: " + ex.Message, ex);
+        }        
     } 
 }
