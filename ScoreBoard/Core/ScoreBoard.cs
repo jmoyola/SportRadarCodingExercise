@@ -43,7 +43,45 @@ public class ScoreBoard
     /// <exception cref="ScoreBoardException"></exception>
     public GameMatch StartGame(Team homeTeam,Team awayTeam)
     {
-        throw new NotImplementedException();
+        DbSession<ScoreBoardDbModel>? dbSession = null;
+        try
+        {
+            // Assert
+            if(homeTeam==null)
+                throw new ArgumentNullException(nameof(homeTeam));
+            if(awayTeam==null)
+                throw new ArgumentNullException(nameof(awayTeam));
+
+            // Creating dbSession
+            using (dbSession = this.DbSessionFactory.NewSession())
+            {
+                // Add Teams to DB if not exists?? (is not specified in the exercise)
+                // if(dbSession.Teams.Contains(homeTeam))
+                //    dbSession.Teams.Add(homeTeam);
+                // if(dbSession.Teams.Contains(awayTeam))
+                //    dbSession.Teams.Add(awayTeam);
+
+                // New Game Match
+                GameMatch ret = new GameMatch(homeTeam, awayTeam);
+                
+                // Add new Game Match to DB
+                dbSession.Model.GameMatches.Add(ret);
+                
+                // Start new Game Match
+                ret.Start();
+                
+                dbSession.Commit(); // Commit model changes
+
+                return ret;
+            }
+        }
+        catch (Exception ex)
+        {
+            if(dbSession!=null)
+                dbSession.Rollback(); // Rollback model changes
+            
+            throw new ScoreBoardException("Error starting a game: " + ex.Message, ex);
+        }
     }
 
     /// <summary>
