@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ORDataBase\ORDataBase.csproj" />
+    </ItemGroup>
+
 </Project>
