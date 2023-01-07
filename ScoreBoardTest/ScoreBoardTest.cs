@@ -55,4 +55,44 @@ public class Tests
         
         Debug.WriteLine("ScoreBoard_StartGame_Test End...");
     }
+    
+    [Test]
+    public void ScoreBoard_UpdateScore_Test()
+    {
+        Team homeTeam;
+        Team awayTeam;
+
+        Debug.WriteLine("ScoreBoard_UpdateScore_Test Start...");
+        
+        // Creating teams for game
+        homeTeam = new Team("homeTeam");
+        awayTeam = new Team("awayTeam");
+        
+        // Starting game
+        this._scoreBoard.StartGame(homeTeam, awayTeam);
+        
+        Debug.WriteLine("ScoreBoard before update score:"
+                        + Environment.NewLine
+                        + String.Join(Environment.NewLine, this._scoreBoard.GetScoreBoard()));
+
+        // Getting first (and only) game in scoreboard
+        GameMatch? gameMatch=this._scoreBoard.GetScoreBoard().FirstOrDefault();
+
+        Debug.WriteLine("Changing score for '" + gameMatch.ToString() + "' to 5 - 7...");
+        
+        // Changing gameMatch scores
+        this._scoreBoard.UpdateScore(gameMatch, 5, 7);
+
+        Debug.WriteLine("ScoreBoard after update score"
+                        + Environment.NewLine
+                        + String.Join(Environment.NewLine, this._scoreBoard.GetScoreBoard()));
+
+        // Retrieving another time scoreboard
+        var sb = this._scoreBoard.GetScoreBoard();
+        
+        // Its ok if gameMatch scores are changed
+        Assert.IsTrue(gameMatch.HomeScore==5 && gameMatch.AwayScore==7);
+
+        Debug.WriteLine("ScoreBoard_UpdateScore_Test End...");
+    }
 }
