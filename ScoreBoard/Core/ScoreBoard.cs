@@ -20,7 +20,18 @@ public class ScoreBoard
     /// <exception cref="ScoreBoardException"></exception>
     public IEnumerable<GameMatch> GetScoreBoard()
     {
-        throw new NotImplementedException();
+        try
+        {
+            // Creating dbSession
+            using (DbSession<ScoreBoardDbModel> dbSession = this.DbSessionFactory.NewSession())
+            {
+                return dbSession.Model.GameMatches.Where(v => v.IsStarted && !v.IsFinish);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ScoreBoardException("Error getting scoreboard: " + ex.Message, ex);
+        }
     }
 
     /// <summary>
