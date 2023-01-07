@@ -8,3 +8,4 @@ The Solution contains:
 simulate Transactions
 2. ScoreBoardModel: Classes for the exercises (entities with its businness logic)
 3. Scoreboard: Main exercise Library.
+4. ScoreboardTest: Main exercise Library Unit test.
