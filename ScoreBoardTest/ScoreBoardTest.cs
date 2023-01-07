@@ -95,4 +95,43 @@ public class Tests
 
         Debug.WriteLine("ScoreBoard_UpdateScore_Test End...");
     }
+    
+    [Test]
+    public void ScoreBoard_FinishGame_Test()
+    {
+        Team homeTeam;
+        Team awayTeam;
+
+        Debug.WriteLine("ScoreBoard_FinishGame_Test Start...");
+        
+        // Creating teams for game
+        homeTeam = new Team("homeTeam");
+        awayTeam = new Team("awayTeam");
+        
+        // Starting game
+        this._scoreBoard.StartGame(homeTeam, awayTeam);
+        
+        // Getting scoreboard content before finish game 
+        GameMatch? gameMatch=this._scoreBoard.GetScoreBoard().FirstOrDefault();
+        
+        Debug.WriteLine("ScoreBoard before finish game:"
+                        + Environment.NewLine
+                        + String.Join(Environment.NewLine, this._scoreBoard.GetScoreBoard()));
+
+        // Finish game
+        this._scoreBoard.Finish(gameMatch);
+
+        
+        Debug.WriteLine("ScoreBoard after finish game:"
+                        + Environment.NewLine
+                        + String.Join(Environment.NewLine, this._scoreBoard.GetScoreBoard()));
+
+        // Getting scoreboard content after finish game
+        var sb = this._scoreBoard.GetScoreBoard();
+        
+        // Its ok if in scoreboard are not any game match with homeTeam and awayTeam 
+        Assert.IsTrue(!sb.Any(v=>v.HomeTeam.Equals(homeTeam) && v.AwayTeam.Equals(awayTeam)));
+        
+        Debug.WriteLine("ScoreBoard_FinishGame_Test End...");
+    }
 }
