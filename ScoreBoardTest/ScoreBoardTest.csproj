@@ -14,4 +14,10 @@
         <PackageReference Include="coverlet.collector" Version="3.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ORDataBase\ORDataBase.csproj" />
+      <ProjectReference Include="..\ScoreBoardModel\ScoreBoardModel.csproj" />
+      <ProjectReference Include="..\ScoreBoard\ScoreBoard.csproj" />
+    </ItemGroup>
+
 </Project>
