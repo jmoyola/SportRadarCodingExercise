@@ -91,7 +91,25 @@ public class ScoreBoard
     /// <exception cref="ScoreBoardException"></exception>
     public void FinishById(Guid gameMatchId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            // Creating dbSession
+            using (DbSession<ScoreBoardDbModel>? dbSession = this.DbSessionFactory.NewSession())
+            {
+                // Retrieving GameMatch for id
+                GameMatch? gameMatch = dbSession.Model.GameMatches.FirstOrDefault(v => v.Id.Equals(gameMatchId));
+                
+                // DB errors
+                if(gameMatch==null)
+                    throw new ScoreBoardException("Don't exists a game match with id '" + gameMatchId + "'");
+                
+                this.Finish(gameMatch);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ScoreBoardException("Error finishing game match with id '" + gameMatchId + "': " + ex.Message, ex);
+        }
     }
 
     /// <summary>
@@ -101,7 +119,28 @@ public class ScoreBoard
     /// <exception cref="ScoreBoardException"></exception>
     public void Finish(GameMatch gameMatch)
     {
-        throw new NotImplementedException();
+        // Assert
+        if(gameMatch==null)
+            throw new ArgumentNullException(nameof(gameMatch));
+
+        DbSession<ScoreBoardDbModel>? dbSession = null;
+        try
+        {
+            // Creating dbSession
+            using (dbSession = this.DbSessionFactory.NewSession())
+            {
+                gameMatch.Finish();
+                
+                dbSession.Commit(); // Commit model changes
+            }
+        }
+        catch (Exception ex)
+        {
+            if(dbSession!=null)
+                dbSession.Rollback(); // Rollback model changes
+            
+            throw new ScoreBoardException("Error finishing game match '" + gameMatch.ToString() + "': " + ex.Message, ex);
+        }
     }
 
     /// <summary>
