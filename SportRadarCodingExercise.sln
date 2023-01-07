@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORDataBase", "ORDataBase\OR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreBoard", "ScoreBoard\ScoreBoard.csproj", "{4BEFB10E-152A-48D2-BB57-D945E26B3492}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreBoardTest", "ScoreBoardTest\ScoreBoardTest.csproj", "{049B6A91-3DD3-4730-BF6D-B5B4D2B7A40A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4BEFB10E-152A-48D2-BB57-D945E26B3492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BEFB10E-152A-48D2-BB57-D945E26B3492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BEFB10E-152A-48D2-BB57-D945E26B3492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049B6A91-3DD3-4730-BF6D-B5B4D2B7A40A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049B6A91-3DD3-4730-BF6D-B5B4D2B7A40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049B6A91-3DD3-4730-BF6D-B5B4D2B7A40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049B6A91-3DD3-4730-BF6D-B5B4D2B7A40A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
