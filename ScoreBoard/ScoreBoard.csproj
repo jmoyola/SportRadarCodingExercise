@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ORDataBase\ORDataBase.csproj" />
+      <ProjectReference Include="..\ScoreBoardModel\ScoreBoardModel.csproj" />
+    </ItemGroup>
+
 </Project>
